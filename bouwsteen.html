@@ -7,10 +7,61 @@
         <title>For Loop 5</title>
     </head>
     <body>
+        <button class="progress-overlay-toggle" onclick="showProgress()">Building Progress</button>
+        <div class="progress-overlay" id="progressOverlay">
+            <h2>Front-end Building Blocks (Voortgang)</h2>
+            <p>
+                Dit bestand is bedoeld om na elke les iets aan toe te voegen tot
+                een volledige <span class="bold italic">Building</span>. Vandaar
+                ook de <span class="bold italic">Building Blocks</span>.
+            </p>
+            <h3>Building</h3>
+            
+            <p>
+                <span><details><summary><span class="bold underline">TO-DO: </span></summary>- Uploaden met GIT naar Github <br>- Mogelijkheid checken om gemaakte code te selecteren naar HTML om zo de technieken te kunnen terug vinden o.i.d.? <br> - Details gecentreerd houden en alleen de Summary uitgeklapt breder tonen<br>- controleren waarom notificatie syle kleur niet goed werkt<br></details></span>
+            </p>
+            <p>
+                <span><details><summary><span class="bold underline">TOEVOEGINGEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- Beging van dit project <br>- Les van For Loop en If statements als begin gebruikt. <br>- De extra's die ik zelf al na die les heb toegevoed, zoals..... <br>- Via Js een element kleurstyling toekennen.</details></span>
+                <span><details><summary><span class="bold underline">PROBLEMEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- onload werkt niet om de progressOverlay te verbergen. Geeft ook een error in de console. <br><code>Cannot access 'theList' before initialization
+                    at addIt (bouwsteen_2.html:33:17)
+                    at HTMLButtonElement.onclick (bouwsteen_2.html:95:67)</code> <br>- notifications kleur wijzigt niet meer door removeIt(x) nadat er door addIt() is toegevoegd. Poging om element-id in globale variabele te zetten werkte ook niet.</details></span></p>
+        </div>
+            <div class="building-container">
+            <div class="levels level-5">5</div>
+
+            <div class="levels level-4">4</div>
+
+            <div class="levels level-3">3</div>
+
+            <div class="levels level-2">2</div>
+
+            <div class="levels level-1">1
+                <input id="toAdd" type="text" /><button onclick="addIt()">Add</button>
+                <br />
+                <div id="notification"></div>
+                <br />
+                <div id="shownList"></div>
+            </div>
+        </div>
         <script>
             document.onload = onloadHidden()
             document.getElementById("progressOverlay").style.display = "none";
             
+            /*var winHeight = $(window).innerHeight();
+$(document).ready(function () {
+  $(".panel").height(winHeight);
+  $("body").height(winHeight * $(".panel").length);
+});
+
+window.addEventListener("resize", function (event) {
+    var winHeight = $(window).innerHeight();
+  $(".panel").height($(window).innerHeight());
+});*/
+
+$(window).on("scroll", function () {
+  $(".building-container").css("bottom", $(window).scrollTop() * -1);
+});
+
             // Global Array
             let theList = [];
 
@@ -79,31 +130,5 @@
                 }
             }
         </script>
-
-       <button onclick="showProgress()">Building Progress</button>
-        <div class="progress-overlay" id="progressOverlay">
-            <h2>Front-end Building Blocks (Voortgang)</h2>
-            <p>
-                Dit bestand is bedoeld om na elke les iets aan toe te voegen tot
-                een volledige <span class="bold italic">Building</span>. Vandaar
-                ook de <span class="bold italic">Building Blocks</span>.
-            </p>
-            <h3>Building</h3>
-            
-            <p>
-                <span><details><summary><span class="bold underline">TO-DO: </span></summary>- Uploaden met GIT naar Github <br>- Mogelijkheid checken om gemaakte code te selecteren naar HTML om zo de technieken te kunnen terug vinden o.i.d.? <br> - Details gecentreerd houden en alleen de Summary uitgeklapt breder tonen<br>- controleren waarom notificatie syle kleur niet goed werkt<br></details></span>
-            </p>
-            <p>
-                <span><details><summary><span class="bold underline">TOEVOEGINGEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- Beging van dit project <br>- Les van For Loop en If statements als begin gebruikt. <br>- De extra's die ik zelf al na die les heb toegevoed, zoals..... <br>- Via Js een element kleurstyling toekennen.</details></span>
-                <span><details><summary><span class="bold underline">PROBLEMEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- onload werkt niet om de progressOverlay te verbergen. Geeft ook een error in de console. <br><code>Cannot access 'theList' before initialization
-                    at addIt (bouwsteen_2.html:33:17)
-                    at HTMLButtonElement.onclick (bouwsteen_2.html:95:67)</code> <br>- notifications kleur wijzigt niet meer door removeIt(x) nadat er door addIt() is toegevoegd. Poging om element-id in globale variabele te zetten werkte ook niet.</details></span></p>
-        </div>
-
-        <input id="toAdd" type="text" /><button onclick="addIt()">Add</button>
-        <br />
-        <div id="notification"></div>
-        <br />
-        <div id="shownList"></div>
     </body>
 </html>
