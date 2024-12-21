@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="bouwsteen_style.css" />
+        <title>For Loop 5</title>
+    </head>
+    <body>
+       <button onclick="showProgress()">Building Progress</button>
+        <div class="progress-overlay" id="progressOverlay">
+            <h2>Front-end Building Blocks (Voortgang)</h2>
+            <p>
+                Dit bestand is bedoeld om na elke les iets aan toe te voegen tot
+                een volledige <span class="bold italic">Building</span>. Vandaar
+                ook de <span class="bold italic">Building Blocks</span>.
+            </p>
+            <h3>Building</h3>
+            
+            <p>
+                <span><details><summary><span class="bold underline">TO-DO: </span></summary>- Uploaden met GIT naar Github <br>- Mogelijkheid checken om gemaakte code te selecteren naar HTML om zo de technieken te kunnen terug vinden o.i.d.? <br> - Details gecentreerd houden en alleen de Summary uitgeklapt breder tonen<br>- controleren waarom notificatie syle kleur niet goed werkt<br></details></span>
+            </p>
+            <p>
+                <span><details><summary><span class="bold underline">TOEVOEGINGEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- Beging van dit project <br>- Les van For Loop en If statements als begin gebruikt. <br>- De extra's die ik zelf al na die les heb toegevoed, zoals..... <br>- Via Js een element kleurstyling toekennen.</details></span>
+                <span><details><summary><span class="bold underline">PROBLEMEN: </span><time datetime="18-12-2024">18-12-2024</timedate></summary>- onload werkt niet om de progressOverlay te verbergen. Geeft ook een error in de console. <br><code>Cannot access 'theList' before initialization
+                    at addIt (bouwsteen_2.html:33:17)
+                    at HTMLButtonElement.onclick (bouwsteen_2.html:95:67)</code> <br>- notifications kleur wijzigt niet meer door removeIt(x) nadat er door addIt() is toegevoegd. Poging om element-id in globale variabele te zetten werkte ook niet.</details></span></p>
+        </div>
+
+        <input id="toAdd" type="text" /><button onclick="addIt()">Add</button>
+        <br />
+        <div id="notification"></div>
+        <br />
+        <div id="shownList"></div>
+
+        <script>
+            // Global Array
+            document.onload = docucument.getElementById("progressOverlay").style.display = "none";
+
+            let theList = [];
+
+            function showProgress() {
+            let progressOverlay = document.getElementById("progressOverlay");
+                if (progressOverlay.style.display === "none") {
+                    progressOverlay.style.display = "flex";
+                } else {
+                    progressOverlay.style.display = "none"; 
+                }
+            }
+
+            function addIt() {
+                // Empty the notification
+                document.getElementById("notification").innerHTML = "";
+                // document.getElementById(
+                //         "notification"
+                //     ).style.backgroundColor = "white";
+                // Create variable to reuse.
+                addingNow = document.getElementById("toAdd").value;
+                theList.push(addingNow);
+                // Empty old List on page to prevent it from repeating.
+                document.getElementById("shownList").innerHTML = "";
+                // Showing the list.
+                for (let i = 0; i < theList.length; i++)
+                    document.getElementById(
+                        "shownList" // Not working to select toRemove for whole div instead of just the Array item.
+                    ).innerHTML += `<br><div id="toRemove">${theList[i]}<button onclick="removeThis(${i})">X</button></div>`;
+                // Show succes message.
+                document.getElementById(
+                    "notification"
+                ).innerHTML = `<br>${addingNow} was added.`;
+                document.getElementById("notification").style.backgroundColor =
+                    "green";
+                // empty the text input.
+                document.getElementById("toAdd").innerHTML = "";
+            }
+
+            function removeThis(x) {
+                document.getElementById("notification").innerHTML = "";
+                document.getElementById("notification").style.backgroundColor =
+                    "white";
+                let confirmRemoval = confirm(
+                    "Do you really want to remove this?"
+                );
+                document.getElementById("toAdd").innerHTML = "";
+                if (confirmRemoval) {
+                    theList.splice(x, 1);
+                    document.getElementById("toRemove").innerHTML = "";
+                    document.getElementById(
+                        "notification"
+                    ).style.backgroundColor = "green";
+                    document.getElementById("notification").innerHTML =
+                        "Removed.";
+                    // addIt();
+                } else {
+                    document.getElementById("notification").innerHTML =
+                        "Cancelled.";
+                    document.getElementById(
+                        "notification"
+                    ).style.backgroundColor = "red";
+                }
+            }
+        </script>
+    </body>
+</html>
